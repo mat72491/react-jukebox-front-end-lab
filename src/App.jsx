@@ -4,12 +4,15 @@ import TrackList from './components/TrackList'
 import * as trackService from './services/trackService'
 import TrackForm from './components/TrackForm'
 import TrackDetail from './components/TrackDetail'
+import NowPlaying from './components/NowPlaying'
 
 const App = () => {
  
  const [trackList, setTrackList] = useState([])
  const [selected, setSelected] = useState(null)
  const [isFormOpen, setIsFormOpen] = useState(false)
+ const [tracks, setTracks] = useState([])
+ const [currentTrack, setCurrentTrack] = useState(null)
 
  useEffect(() => {
   const fetchTracks = async () => {
@@ -25,6 +28,10 @@ const App = () => {
   fetchTracks()
  },[])
  
+const handlePlayTrack = (track) => {
+  setCurrentTrack(track)
+}
+
  const updateSelected = (track) => {
   setSelected(track)
  } 
@@ -86,6 +93,7 @@ setTrackList((prevTracks) => prevTracks.filter((track) => track._id !== trackId)
     trackList={trackList}
     updateSelected={updateSelected}
     handleFormView={handleFormView}
+    onPlay={handlePlayTrack}
     isFormOpen={isFormOpen}/>
     {isFormOpen ? (
   <TrackForm 
@@ -96,6 +104,7 @@ setTrackList((prevTracks) => prevTracks.filter((track) => track._id !== trackId)
                 handleFormView={handleFormView}
                 handleRemoveTrack={handleRemoveTrack}
                 /> }
+    <NowPlaying track={currentTrack} />
   </>
   )
 };
