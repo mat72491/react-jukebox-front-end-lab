@@ -50,7 +50,7 @@ const App = () => {
  
 const handleUpdateTrack = async (formData, trackId) => {
   try{
-    const updatedTrack = await trackService.updateTrack(formData, trackId)
+    const updatedTrack = await trackService.update(formData, trackId)
     if (updatedTrack.error) {
       throw new Error(updatedTrack.error)
     }
@@ -66,6 +66,20 @@ const handleUpdateTrack = async (formData, trackId) => {
   }
 }
 
+const handleRemoveTrack = async (trackId) => {
+  try{
+    const removedTrack = await trackService.deleteTrack(trackId)
+    if (removedTrack.error) {
+      throw new Error(removedTrack.error)
+    }
+setTrackList((prevTracks) => prevTracks.filter((track) => track._id !== trackId))
+
+  }catch (error) {
+    console.log(error)
+  }
+}
+
+
   return (
   <>
   <TrackList
@@ -78,7 +92,10 @@ const handleUpdateTrack = async (formData, trackId) => {
     handleAddTrack={handleAddTrack}
     handleUpdateTrack={handleUpdateTrack}
     selected={selected} /> ) :
-    <TrackDetail selected={selected} handleFormView={handleFormView}/> }
+    <TrackDetail selected={selected} 
+                handleFormView={handleFormView}
+                handleRemoveTrack={handleRemoveTrack}
+                /> }
   </>
   )
 };

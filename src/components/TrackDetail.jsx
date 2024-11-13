@@ -8,9 +8,10 @@ const TrackDetail = (props) => {
         return (
             <div>
                 <h1>{props.selected.title}</h1>
-                <h2>Artist:{props.selected.artist}</h2>
+                <h2>Artist: {props.selected.artist}</h2>
 
         <button onClick={() => props.handleFormView(props.selected)}>Edit</button>
+        <button onClick={() => props.handleRemoveTrack(props.selected._id)}>Delete</button>
             </div>
         )
 }
