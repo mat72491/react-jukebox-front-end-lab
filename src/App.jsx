@@ -11,7 +11,6 @@ const App = () => {
  const [trackList, setTrackList] = useState([])
  const [selected, setSelected] = useState(null)
  const [isFormOpen, setIsFormOpen] = useState(false)
- const [tracks, setTracks] = useState([])
  const [currentTrack, setCurrentTrack] = useState(null)
 
  useEffect(() => {
