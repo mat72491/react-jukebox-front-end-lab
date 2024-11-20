@@ -36,7 +36,7 @@ const handlePlayTrack = (track) => {
  } 
 
  const handleFormView = (track) => {
-  if (!track.title) setSelected(null)
+  if (!track) setSelected(null)
     setIsFormOpen(!isFormOpen)
  }
 
@@ -90,18 +90,19 @@ setTrackList((prevTracks) => prevTracks.filter((track) => track._id !== trackId)
   <>
   <TrackList
     trackList={trackList}
+    selected={selected}
     updateSelected={updateSelected}
     handleFormView={handleFormView}
     onPlay={handlePlayTrack}
+    handleRemoveTrack={handleRemoveTrack}
     isFormOpen={isFormOpen}/>
     {isFormOpen ? (
   <TrackForm 
     handleAddTrack={handleAddTrack}
     handleUpdateTrack={handleUpdateTrack}
+
     selected={selected} /> ) :
     <TrackDetail selected={selected} 
-                handleFormView={handleFormView}
-                handleRemoveTrack={handleRemoveTrack}
                 /> }
     <NowPlaying track={currentTrack} />
   </>
